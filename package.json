@@ -1,23 +1,26 @@
 {
-	"name" : "nativescript-toolbar",
-	"main" : "tool-bar.js",
-	"nativescript": {
-    	"platforms": {
-      		"ios": "1.0.0"
-    	}
-	},
-	"version": "0.1.1",
-    "description": "A ios UIToolBar plugin for nativescript.",
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com:rajivnarayana/nativescript-toolbar.git"
-	},
-	"keywords": [
-		"Nativescript",
-		"toolbar",
-		"UIToolBar",
-		"tool-bar"
-	],
-	"author": "Rajiv Narayana <rajivnarayana@gmail.com> (https://github.com/rajivnarayana)",
-	"license": "MIT"
+  "name": "nativescript-toolbar",
+  "main": "tool-bar.js",
+  "nativescript": {
+    "platforms": {
+      "ios": "1.0.0"
+    }
+  },
+  "version": "0.2.1",
+  "description": "A ios UIToolBar plugin for nativescript.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:rajivnarayana/nativescript-toolbar.git"
+  },
+  "keywords": [
+    "Nativescript",
+    "toolbar",
+    "UIToolBar",
+    "tool-bar"
+  ],
+  "author": "Rajiv Narayana <rajivnarayana@gmail.com> (https://github.com/rajivnarayana)",
+  "license": "MIT",
+  "devDependencies": {
+    "tns-core-modules": "^1.5.1"
+  }
 }

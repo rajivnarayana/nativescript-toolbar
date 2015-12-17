@@ -1,13 +1,13 @@
 declare module "tool-bar" {
     import { EventData } from "data/observable";
-    import { AddChildFromBuilder, AddArrayFromBuilder, View } from "ui/core/view";
+    import { AddArrayFromBuilder, View } from "ui/core/view";
     import { Property } from "ui/core/dependency-observable";
     import { Bindable } from "ui/core/bindable";
 
     /**
      * Provides an abstraction over the ToolBar (iOS).
      */
-    export class ToolBar extends View implements AddArrayFromBuilder, AddChildFromBuilder {
+    export class ToolBar extends View implements AddArrayFromBuilder {
         
         /**
          * Gets the collection of tool bar items.
@@ -29,7 +29,7 @@ declare module "tool-bar" {
         //@endprivate
         
 		_addArrayFromBuilder(name: string, value: Array<any>): void;
-        _addChildFromBuilder(name: string, value: any): void;
+        
 	}
 	
 	/**

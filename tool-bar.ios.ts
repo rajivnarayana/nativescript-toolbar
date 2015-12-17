@@ -1,13 +1,13 @@
-import common = require("./tool-bar-common");
-import { IOSToolBarItemSettings, ToolBarItem as ToolBarItemDefinition } from "tool-bar";
+import { ToolBar as ToolBarDefinition, ToolBarItem as ToolBarItemDefinition, knownCollections } from "./tool-bar-common";
+import { IOSToolBarItemSettings, ToolBarItem as IToolBarItem } from "tool-bar";
 import { layout } from "utils/utils";
 import { isNumber } from "utils/types";
 import { View } from "ui/core/view";
 import { fromFileOrResource } from "image-source";
 
-global.moduleMerge(common, exports);
+exports.knownCollections = knownCollections;
 
-export class ToolBarItem extends common.ToolBarItem {
+export class ToolBarItem extends ToolBarItemDefinition {
     private _ios: IOSToolBarItemSettings = {
         systemIcon: undefined
     };
@@ -20,7 +20,7 @@ export class ToolBarItem extends common.ToolBarItem {
     }
 }
 
-export class ToolBar extends common.ToolBar {
+export class ToolBar extends ToolBarDefinition {
     
     private _ios: UIToolbar;
     
@@ -31,7 +31,6 @@ export class ToolBar extends common.ToolBar {
     
     public update() {
 		var items = this.barItems.getVisibleItems();
-		console.log(`no of items : ${items.length}`);
         var itemsArray : NSMutableArray = NSMutableArray.new();
         for (var i = 0; i < items.length; i++) {
             itemsArray.addObject(this.createBarButtonItem(items[i]));
@@ -41,7 +40,7 @@ export class ToolBar extends common.ToolBar {
         this.updateColors(this._ios);
     }
 
-    private createBarButtonItem(item: ToolBarItemDefinition): UIBarButtonItem {
+    private createBarButtonItem(item: IToolBarItem): UIBarButtonItem {
         var tapHandler = TapToolBarItemHandlerImpl.initWithOwner(new WeakRef(item));
         // associate handler with menuItem or it will get collected by JSC.
         (<any>item).handler = tapHandler;
@@ -75,7 +74,6 @@ export class ToolBar extends common.ToolBar {
         else {
             toolbar.tintColor = null;
         }
-
         var bgColor = this.backgroundColor;
         toolbar.barTintColor = bgColor ? bgColor.ios : null;
     }
@@ -112,9 +110,9 @@ export class ToolBar extends common.ToolBar {
 }
 
 class TapToolBarItemHandlerImpl extends NSObject {
-    private _owner: WeakRef<ToolBarItemDefinition>;
+    private _owner: WeakRef<IToolBarItem>;
 
-    public static initWithOwner(owner: WeakRef<ToolBarItemDefinition>): TapToolBarItemHandlerImpl {
+    public static initWithOwner(owner: WeakRef<IToolBarItem>): TapToolBarItemHandlerImpl {
         let handler = <TapToolBarItemHandlerImpl>TapToolBarItemHandlerImpl.new();
         handler._owner = owner;
         return handler;

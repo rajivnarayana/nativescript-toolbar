@@ -14,14 +14,14 @@ This command automatically installs the necessary files, as well as stores nativ
 
 ## Examples
 
-The code below creates a tool bar in xml
+The code below creates a tool bar in xml with tint color for buttons as green and the background as blue.
 
 ```xml
 <!-- my-page.xml -->
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" 
 	xmlns:tools="nativescript-toolbar">
   <StackLayout style="vertical-align : bottom">
-  	<tools:ToolBar>
+  	<tools:ToolBar style="background-color : blue; color: green">
   		<tools.ToolBar.barItems>
   			<tools:ToolBarItem text="Done"/>
   		</tools.ToolBar.barItems>
@@ -52,3 +52,16 @@ The value should be a number from the UIBarButtonSystemItem enumeration
 <img src="https://raw.githubusercontent.com/rajivnarayana/nativescript-toolbar/master/cancel-done-portrait.png" width="320"/>
 <img src="https://raw.githubusercontent.com/rajivnarayana/nativescript-toolbar/master/cancel-done-landscape.png" height="320"/>
 
+## NPM publish
+
+Clone this repository and install typescript plugin globally. Use the typescript compiler to convert to ts files javascript  
+
+```
+$ tsc
+```
+
+Make sure js files are updated with your changes
+
+```
+npm publish .
+```

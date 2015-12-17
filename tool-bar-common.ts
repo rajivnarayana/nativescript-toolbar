@@ -1,4 +1,4 @@
-import { ToolBarItem as ToolBarItemDefinition, ToolBar as ToolBarDefinition, ToolBarItems as ToolBarItemsDefinition, IOSToolBarItemSettings} from "tool-bar";
+import { ToolBarItem as IToolBarItem, ToolBar as ToolBarDefinition, ToolBarItems as ToolBarItemsDefinition, IOSToolBarItemSettings} from "tool-bar";
 import { View } from "ui/core/view";
 import { Bindable } from "ui/core/bindable";
 import { Property, PropertyChangeData, PropertyMetadata } from "ui/core/dependency-observable";
@@ -7,7 +7,7 @@ import { Visibility } from "ui/enums";
 var TOOLBAR_ITEMS = "barItems";
 
 export module knownCollections {
-    export var items = "barItems";
+    export var barItems = TOOLBAR_ITEMS;
 }
 
 export class ToolBar extends View implements ToolBarDefinition {
@@ -18,7 +18,7 @@ export class ToolBar extends View implements ToolBarDefinition {
         return this._toolbarItems;
     }
     set barItems(value: ToolBarItems) {
-        throw new Error("actionItems property is read-only");
+        throw new Error("barItems property is read-only");
     }
 
     get _childrenCount(): number {
@@ -35,17 +35,9 @@ export class ToolBar extends View implements ToolBarDefinition {
     }
 
     public _addArrayFromBuilder(name: string, value: Array<any>) {
-        console.log(`Add array from builder: for name: ${value.length}`);
         if (name === TOOLBAR_ITEMS) {
-            // this.barItems.setItems(value);
+            this.barItems.setItems(value);
         }
-    }
-
-    public _addChildFromBuilder(name: string, value: any) {
-        console.log(`Add child from builder: for name: ${value}`);
-        // if (name === "ToolBarItem") {
-            this.barItems.addItem(value);
-        // }
     }
 
     public _onBindingContextChanged(oldValue: any, newValue: any) {
@@ -64,15 +56,14 @@ export class ToolBar extends View implements ToolBarDefinition {
 }
 
 export class ToolBarItems implements ToolBarItemsDefinition {
-    private _items: Array<ToolBarItemDefinition> = new Array<ToolBarItemDefinition>();
+    private _items: Array<IToolBarItem> = new Array<IToolBarItem>();
     private _toolBar: ToolBar;
 
     constructor(toolBar: ToolBar) {
         this._toolBar = toolBar;
     }
 
-    public addItem(item: ToolBarItemDefinition): void {
-        console.log(`addItem : ${item?item.text:"empty"}`);
+    public addItem(item: IToolBarItem): void {
         if (!item) {
             throw new Error("Cannot add empty item");
         }
@@ -82,7 +73,7 @@ export class ToolBarItems implements ToolBarItemsDefinition {
         this.invalidate();
     }
 
-    public removeItem(item: ToolBarItemDefinition): void {
+    public removeItem(item: IToolBarItem): void {
         if (!item) {
             throw new Error("Cannot remove empty item");
         }
@@ -97,11 +88,11 @@ export class ToolBarItems implements ToolBarItemsDefinition {
         this.invalidate();
     }
 
-    public getItems(): Array<ToolBarItemDefinition> {
+    public getItems(): Array<IToolBarItem> {
         return this._items.slice();
     }
 
-    public getVisibleItems(): Array<ToolBarItemDefinition> {
+    public getVisibleItems(): Array<IToolBarItem> {
         var visibleItems = [];
         this._items.forEach((item) => {
             if (isVisible(item)) {
@@ -112,7 +103,7 @@ export class ToolBarItems implements ToolBarItemsDefinition {
         return visibleItems;
     }
 
-    public getItemAt(index: number): ToolBarItemDefinition {
+    public getItemAt(index: number): IToolBarItem {
         if (index < 0 || index >= this._items.length) {
             return undefined;
         }
@@ -120,9 +111,8 @@ export class ToolBarItems implements ToolBarItemsDefinition {
         return this._items[index];
     }
 
-    public setItems(items: Array<ToolBarItemDefinition>) {
+    public setItems(items: Array<IToolBarItem>) {
         
-        console.log(`Set Items : ${items.length}`);
         // Remove all existing items
         while (this._items.length > 0) {
             this.removeItem(this._items[this._items.length - 1]);
@@ -143,7 +133,7 @@ export class ToolBarItems implements ToolBarItemsDefinition {
     }
 }
 
-export class ToolBarItem extends Bindable implements ToolBarItemDefinition {
+export class ToolBarItem extends Bindable implements IToolBarItem {
     public static tapEvent = "tap";
 
     public static textProperty = new Property(
@@ -208,6 +198,6 @@ export class ToolBarItem extends Bindable implements ToolBarItemDefinition {
     }
 }
 
-export function isVisible(item: ToolBarItemDefinition) {
+export function isVisible(item: IToolBarItem) {
     return item.visibility === Visibility.visible;
 }
