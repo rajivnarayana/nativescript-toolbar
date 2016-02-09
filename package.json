@@ -3,7 +3,7 @@
   "main": "tool-bar.js",
   "nativescript": {
     "platforms": {
-      "ios": "1.0.0"
+      "ios": "1.0.1"
     }
   },
   "version": "0.2.1",

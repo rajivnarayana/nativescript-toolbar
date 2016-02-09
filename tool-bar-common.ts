@@ -3,6 +3,7 @@ import { View } from "ui/core/view";
 import { Bindable } from "ui/core/bindable";
 import { Property, PropertyChangeData, PropertyMetadata } from "ui/core/dependency-observable";
 import { Visibility } from "ui/enums";
+import { PropertyMetadataSettings } from "ui/core/dependency-observable";
 
 var TOOLBAR_ITEMS = "barItems";
 
@@ -13,6 +14,11 @@ export module knownCollections {
 export class ToolBar extends View implements ToolBarDefinition {
 
     private _toolbarItems: ToolBarItems;
+    
+    public static barPositionProperty = new Property("barPosition", "ToolBar", new PropertyMetadata(UIBarPositionAny, PropertyMetadataSettings.None, (data : PropertyChangeData) => {
+            let toolBar = <ToolBar>data.object;
+            toolBar.onPositionChanged(data);
+        }, null));
 
     get barItems(): ToolBarItems {
         return this._toolbarItems;
@@ -52,6 +58,19 @@ export class ToolBar extends View implements ToolBarDefinition {
         }
 
         return true;
+    }
+    
+    public onPositionChanged(data: PropertyChangeData) {
+        
+    }
+    
+    public get barPosition(): number {
+        return this._getValue(ToolBar.barPositionProperty);
+    }
+    
+    public set barPosition(position : number) {
+        this._setValue(ToolBar.barPositionProperty, position);
+        this.onPositionChanged({newValue : position});
     }
 }
 

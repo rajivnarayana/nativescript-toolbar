@@ -4,6 +4,7 @@ import { layout } from "utils/utils";
 import { isNumber } from "utils/types";
 import { View } from "ui/core/view";
 import { fromFileOrResource } from "image-source";
+import { PropertyChangeData } from "ui/core/dependency-observable";
 
 exports.knownCollections = knownCollections;
 
@@ -20,13 +21,32 @@ export class ToolBarItem extends ToolBarItemDefinition {
     }
 }
 
+export class ToolBarPositionDelegate extends NSObject {
+    public static ObjCProtocols = [UIToolbarDelegate];
+    
+    public position : number;
+    
+    public positionForBar() : number {
+        return this.position;
+    }
+    
+    public static initWithPosition(position : number = UIBarPositionBottom): ToolBarPositionDelegate {
+        let handler = <ToolBarPositionDelegate>ToolBarPositionDelegate.new();
+        handler.position = position;
+        return handler;
+    }
+}
+
 export class ToolBar extends ToolBarDefinition {
     
     private _ios: UIToolbar;
+    private _delegate : ToolBarPositionDelegate; /* ToolBarPositioningDelegate */
     
     constructor() {
         super();
         this._ios = UIToolbar.alloc().initWithFrame(CGRectZero);
+        this._delegate = ToolBarPositionDelegate.initWithPosition(UIBarPositionAny);
+        this._ios.delegate = this._delegate;
     }
     
     public update() {
@@ -106,6 +126,11 @@ export class ToolBar extends ToolBarDefinition {
     
     get ios() : UIToolbar {
         return this._ios;
+    }
+    
+    public onPositionChanged(data: PropertyChangeData) {
+        this._delegate.position = data.newValue;
+        this.ios.delegate = this._delegate;    
     }
 }
 

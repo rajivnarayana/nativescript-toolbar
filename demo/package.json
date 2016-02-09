@@ -1,0 +1,12 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.demo",
+    "tns-ios": {
+      "version": "1.5.2"
+    }
+  },
+  "dependencies": {
+    "nativescript-toolbar": "file:..",
+    "tns-core-modules": "1.5.2"
+  }
+}

@@ -13,5 +13,9 @@
     "filesGlob": [
         "./**/*.ts",
         "!./node_modules/**/*.ts"
+    ],
+    
+    "exclude": [
+        "platforms"
     ]
 }

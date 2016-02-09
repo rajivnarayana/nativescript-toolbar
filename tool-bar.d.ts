@@ -8,7 +8,7 @@ declare module "tool-bar" {
      * Provides an abstraction over the ToolBar (iOS).
      */
     export class ToolBar extends View implements AddArrayFromBuilder {
-        
+
         /**
          * Gets the collection of tool bar items.
          */
@@ -29,6 +29,16 @@ declare module "tool-bar" {
         //@endprivate
         
 		_addArrayFromBuilder(name: string, value: Array<any>): void;
+        
+        /**
+         * Gets or sets the barPosition
+         * https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIBarPositioning_Protocol/index.html#//apple_ref/doc/c_ref/UIBarPosition
+         * UIBarPositionAny = 0,
+         * UIBarPositionBottom = 1,
+         * UIBarPositionTop = 2,
+         * UIBarPositionTopAttached = 3,
+         */
+        barPosition: number;
         
 	}
 	
