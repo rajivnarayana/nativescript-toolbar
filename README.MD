@@ -12,6 +12,22 @@ $ tns plugin add nativescript-toolbar
 
 This command automatically installs the necessary files, as well as stores nativescript-toolbar as a dependency in your project's `package.json` file.
 
+## Modal screens.
+
+Toolbar can help with working around an [issue](https://github.com/NativeScript/NativeScript/issues/781) with pages not having an actionbar on iOS when the page is presented as a modal. There is a <code>barPosition</code> property which can be set to 3 i.e. [UIBarPositionTopAttached](https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIBarPositioning_Protocol/index.html#//apple_ref/doc/c_ref/UIBarPosition) to make the toolbar look like an action bar for your modal pages.
+
+```xml
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
+    xmlns:tools="nativescript-toolbar">
+  <DockLayout stretchLastChild="false">
+    <tools:ToolBar dock="top" style="margin-bottom:0.5" barPosition="3">
+        <tools.ToolBar.barItems>
+            <tools:ToolBarItem text="Done"/>
+        </tools.ToolBar.barItems>
+    </tools:ToolBar>
+  </DockLayout>
+</Page>
+``` 
 ## Examples
 
 The code below creates a tool bar in xml with tint color for buttons as green and the background as blue.
