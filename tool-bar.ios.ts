@@ -111,7 +111,7 @@ export class ToolBar extends ToolBarDefinition {
         let navBarHeight = 0;
 
         if (heightMode != layout.EXACTLY) {
-            let toolbarSize = this._ios.intrinsicContentSize();
+            let toolbarSize = this._ios.intrinsicContentSize;
             newHeight = toolbarSize.height;
             heightMode = layout.EXACTLY;
         }
