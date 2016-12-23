@@ -1,6 +1,6 @@
 import { ToolBar as ToolBarDefinition, ToolBarItem as ToolBarItemDefinition, knownCollections } from "./tool-bar-common";
 import { IOSToolBarItemSettings, ToolBarItem as IToolBarItem } from "tool-bar";
-import { layout } from "utils/utils";
+import { layout, ios } from "utils/utils";
 import { isNumber } from "utils/types";
 import { View } from "ui/core/view";
 import { fromFileOrResource } from "image-source";
@@ -111,7 +111,8 @@ export class ToolBar extends ToolBarDefinition {
         let navBarHeight = 0;
 
         if (heightMode != layout.EXACTLY) {
-            let toolbarSize = this._ios.intrinsicContentSize();
+            // Use ios.getter for backwards compat with iOS versions < 10
+            let toolbarSize = ios.getter(this._ios, this._ios.intrinsicContentSize);
             newHeight = toolbarSize.height;
             heightMode = layout.EXACTLY;
         }
