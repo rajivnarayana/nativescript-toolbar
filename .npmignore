@@ -2,4 +2,6 @@ cancel-done-landscape.png
 cancel-done-portrait.png
 tool-bar.ios.ts
 tool-bar-common.ts
+references.d.ts
 tsconfig.json
+demo/
