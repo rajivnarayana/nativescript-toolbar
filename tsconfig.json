@@ -1,21 +1,17 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "es5",
         "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
         "removeComments": true,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "experimentalDecorators": true,
+        "lib": [
+            "es2016"
+        ]
     },
     
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
-    
     "exclude": [
-        "platforms"
+        "node_modules",
+        "platforms",
+        "demo"
     ]
 }
