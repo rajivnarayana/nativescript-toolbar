@@ -23,6 +23,9 @@
   ],
   "author": "Rajiv Narayana <rajivnarayana@gmail.com> (https://github.com/rajivnarayana)",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "tns-core-modules": "^2.4.4",
     "tns-platform-declarations": "^2.4.0-2016-09-28-1"
