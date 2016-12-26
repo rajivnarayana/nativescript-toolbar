@@ -3,7 +3,10 @@
   "main": "tool-bar.js",
   "nativescript": {
     "platforms": {
-      "ios": "1.0.1"
+      "ios": "2.4.0"
+    },
+    "tns-ios": {
+      "version": "2.4.0"
     }
   },
   "version": "0.2.2",
@@ -21,6 +24,7 @@
   "author": "Rajiv Narayana <rajivnarayana@gmail.com> (https://github.com/rajivnarayana)",
   "license": "MIT",
   "devDependencies": {
-    "tns-core-modules": "^1.5.1"
+    "tns-core-modules": "^2.4.4",
+    "tns-platform-declarations": "^2.4.0-2016-09-28-1"
   }
 }
